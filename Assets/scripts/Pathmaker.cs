@@ -9,7 +9,8 @@ using UnityEngine;
 // STEP 1: ======================================================================================
 // put this script on a Sphere... it will move around, and drop a path of floor tiles behind it
 
-public class Pathmaker : MonoBehaviour {
+public class Pathmaker : MonoBehaviour
+{
 
 // STEP 2: ============================================================================================
 // translate the pseudocode below
@@ -22,42 +23,38 @@ public class Pathmaker : MonoBehaviour {
 	private int counter = 0;
 	public Transform[] floorPrefabs;
 	public Transform pathmakerSpherePrefab;
-	public static int globalTileCount =0;
-	
-	
+	public static int globalTileCount = 0;
+
+
 	//variables
 	private int lifespan;
 	private float turnRight;
-	private float tunrLeft;
+	private float turnLeft;
 
 
 	void Start()
 	{
 		lifespan = Random.Range(35, 65);
 		turnRight = Random.Range(.20f, .30f);
-		
+		globalTileCount = 0;
 
 	}
-	
+
 	void Update()
 	{
 
-		if (globalTileCount < 500)
-		{
-		
-
-		if (counter < lifespan)
+		if (counter < lifespan && globalTileCount < 50)
 		{
 			float randomIndex = Random.Range(0f, 1f);
 			if (randomIndex < turnRight)
 			{
 				transform.Rotate(0f, 90f, 0f);
 			}
-			else if (randomIndex >= .25f && randomIndex <= .5f)
+			else if (randomIndex >= .31f && randomIndex <= .5f)
 			{
 				transform.Rotate(0f, -90f, 0f);
 			}
-			else if (randomIndex >= .85f && randomIndex <= 1.0f)
+			else if (randomIndex >= .98f && randomIndex <= 1.0f)
 			{
 				Instantiate(pathmakerSpherePrefab, transform.position, transform.rotation);
 			}
@@ -74,6 +71,7 @@ public class Pathmaker : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+}
 
 //		If counter is less than 50, then:
 //			Generate a random number from 0.0f to 1.0f;
@@ -87,9 +85,9 @@ public class Pathmaker : MonoBehaviour {
 //			Increment counter;
 //		Else:
 //			Destroy my game object; 		// self destruct if I've made enough tiles already
-	}
+	
 
-} // end of class scope
+ // end of class scope
 
 // MORE STEPS BELOW!!!........
 

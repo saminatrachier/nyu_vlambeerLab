@@ -11,7 +11,7 @@ public class Restart : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.R))
 		{
-			SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex ) ;		
+			SceneManager.LoadScene(0) ;		
 		}
 	}
 	//Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
