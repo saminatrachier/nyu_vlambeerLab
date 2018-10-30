@@ -19,8 +19,62 @@ public class Pathmaker : MonoBehaviour {
 //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
 //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
 
+	private int counter = 0;
+	public Transform[] floorPrefabs;
+	public Transform pathmakerSpherePrefab;
+	public static int globalTileCount =0;
+	
+	
+	//variables
+	private int lifespan;
+	private float turnRight;
+	private float tunrLeft;
 
-	void Update () {
+
+	void Start()
+	{
+		lifespan = Random.Range(35, 65);
+		turnRight = Random.Range(.20f, .30f);
+		
+
+	}
+	
+	void Update()
+	{
+
+		if (globalTileCount < 500)
+		{
+		
+
+		if (counter < lifespan)
+		{
+			float randomIndex = Random.Range(0f, 1f);
+			if (randomIndex < turnRight)
+			{
+				transform.Rotate(0f, 90f, 0f);
+			}
+			else if (randomIndex >= .25f && randomIndex <= .5f)
+			{
+				transform.Rotate(0f, -90f, 0f);
+			}
+			else if (randomIndex >= .85f && randomIndex <= 1.0f)
+			{
+				Instantiate(pathmakerSpherePrefab, transform.position, transform.rotation);
+			}
+
+			int RandomNumber = Random.Range(0, floorPrefabs.Length);
+			Instantiate(floorPrefabs[RandomNumber], transform.position, transform.rotation);
+			transform.Translate(0f, 0f, 5f);
+
+			counter++;
+			globalTileCount++;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
+
 //		If counter is less than 50, then:
 //			Generate a random number from 0.0f to 1.0f;
 //			If random number is less than 0.25f, then rotate myself 90 degrees;
